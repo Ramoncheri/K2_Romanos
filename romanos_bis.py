@@ -1,5 +1,3 @@
-
-
 numRom= {
     'M': 1000,
     'D': 500,
@@ -17,7 +15,7 @@ def romano_a_entero(rom):
     entero=0
     numRepes=0
     letraAnt=''
-    #letraAnter=''
+    letraAnter=''
     klist= list(numRom.keys())
 
 
@@ -33,6 +31,7 @@ def romano_a_entero(rom):
 
         
 
+    for letra in rom:
         
         if letra in numRom:
             if letraAnt=='' or numRom[letra]<= numRom[letraAnt]:
@@ -51,6 +50,3 @@ def romano_a_entero(rom):
         
 
     return entero
-
-
-
