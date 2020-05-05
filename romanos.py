@@ -17,27 +17,18 @@ def romano_a_entero(rom):
     entero=0
     numRepes=0
     letraAnt=''
-    #letraAnter=''
+    fueResta= False
     klist= list(numRom.keys())
 
 
     for letra in rom:
-        if letra not in numRom:
-            return 'Error de formato'
-        if letra==letraAnt and numRepes==2:
-            return 'Error de formato'
-        elif letra==letraAnt :
-            numRepes +=1           
-        else:
-            pass
-
-        
-
         
         if letra in numRom:
-            if letraAnt=='' or numRom[letra]<= numRom[letraAnt]:
+            
+            if letraAnt == '' or numRom[letra]<= numRom[letraAnt]:
                 entero += numRom[letra]
-            elif numRom[letra]> numRom[letraAnt]:
+                fueResta= False
+            else:
                 if klist.index(letraAnt) %2 != 0:
                     return 'Error de formato'
 
@@ -45,7 +36,22 @@ def romano_a_entero(rom):
                     return 'Error de formato'
                         
                 else:
-                    entero += numRom[letra]- numRom[letraAnt]*2
+                    if numRepes==1 or fueResta== True:
+                        return 'Error de formato'
+                    else:
+                        entero += numRom[letra]- numRom[letraAnt]*2
+                        fueResta= True
+
+        if letra not in numRom:
+            return 'Error de formato'
+        if letra==letraAnt and numRepes==2:
+            return 'Error de formato'
+        elif letra==letraAnt :
+            numRepes +=1           
+        else:
+            numRepes=0
+            
+
 
         letraAnt= letra
         
