@@ -6,7 +6,7 @@ print (romanos.romano_a_entero(rom))
 
 
 
-ent= input ('Ahora mete un número entero: ')
+ent= int(input ('Ahora mete un número entero: '))
 
 print (romanos.entero_a_romano(ent))
 

@@ -63,47 +63,53 @@ def romano_a_entero(rom):
 
 def entero_a_romano(valor): 
 
+    componentes= descomponer(valor)
+
     resultado= ''
-    res = ''
-    numRepes=0
-    valRepes=0
-    kAnt=''
-    resRepes= ''
+    #res = ''
+    
 
-    while valor>0:
-        k, v= busca_valor_menor_o_igual(valor)
-        valor -= v
-        kind= klist.index(k)
-        ksup= kind-1
-        kinf= kind+1
+    for valor in componentes:
+        numRepes=0
+        valRepes=0
+        kAnt=''
+        resRepes= ''
+        res = ''
+        while valor>0:
+            k, v= busca_valor_menor_o_igual(valor)
+            valor -= v
+            kind= klist.index(k)
+            ksup= kind-1
+            kinf= kind+1
 
 
-        if kAnt==k:
-            
-            numRepes +=1
-            valRepes += numRom[klist[kind]]
-            resRepes +=k
-            if numRepes>2:
+            if kAnt==k:
                 
-                if valRepes + numRom[klist[kind]] == numRom[klist[ksup]]- numRom[klist[kind]]:
-                    resRepes= (klist[ksup])
-                    resultado += resRepes
-                #elif valRepes== 
-                   # resRepes += (klist[ksup]+ klist[kinf])
-            
-        if kAnt== '' or kAnt != k:
-             
-            if klist.index(k) %2 != 0:
-                if (valor+ v) ==numRom[klist[ksup]]-numRom[klist[kinf]]:
-                    res += (klist[kinf]+ klist[ksup])
-                    valor -= numRom[klist[ksup]]-numRom[klist[kinf]]
+                numRepes +=1
+                valRepes += numRom[klist[kind]]
+                res +=k
+                if numRepes>2:
+                    
+                    if valRepes + numRom[klist[kind]] == numRom[klist[ksup]]- numRom[klist[kind]]:
+                        res= (klist[kind]+ klist[ksup])
+                        #res = resRepes
+                    #elif valRepes== 
+                    # resRepes += (klist[ksup]+ klist[kinf])
+                
+            if kAnt== '' or kAnt != k:
+                
+                if klist.index(k) %2 != 0:
+                    if (valor+ v) ==numRom[klist[ksup]]-numRom[klist[kinf]]:
+                        res = (klist[kinf]+ klist[ksup])
+                        valor -= numRom[klist[ksup]]-numRom[klist[kinf]]
+                    else:
+                        res +=k
                 else:
-                    res +=k
-            else:
-                res += k
-            #resultado += res
-        kAnt=k
-        resultado = (res +resRepes)   
+                    res += k
+                #resultado += res
+            kAnt=k
+            #res = (res +resRepes)  
+        resultado +=res 
     return resultado
 
     
@@ -115,4 +121,10 @@ def busca_valor_menor_o_igual(v):
 
 
 def descomponer(numero):
-    
+    res =[]
+    for orden in range (3,0,-1): #desde 3 a 0, restanto de 1 en 1
+        resto= numero % 10**orden
+        res.append(numero- resto)
+        numero= resto
+    res.append(numero)
+    return res

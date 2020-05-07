@@ -79,6 +79,10 @@ class EnteroARomanoTest(unittest.TestCase):
     def test_descomponer(self):
         self.assertEqual(romanos.descomponer(1492), [1000,400,90,2])
 
+    def test_entero_a_romano(self):
+        self.assertEqual(romanos.entero_a_romano(1492),'MCDXCII')
+        self.assertEqual(romanos.entero_a_romano(3999),'MMMCMXCIX')
+
 
 if __name__=='__main__':
     unittest.main()
