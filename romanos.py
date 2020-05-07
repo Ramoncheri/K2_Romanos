@@ -10,6 +10,8 @@ numRom= {
     'I':1
     }
 
+klist= list(numRom.keys())
+
 def romano_a_entero(rom):
     if rom== '':
         return 'Error de formato'
@@ -18,7 +20,7 @@ def romano_a_entero(rom):
     numRepes=0
     letraAnt=''
     fueResta= False
-    klist= list(numRom.keys())
+    
 
 
     for letra in rom:
@@ -59,4 +61,58 @@ def romano_a_entero(rom):
     return entero
 
 
+def entero_a_romano(valor): 
 
+    resultado= ''
+    res = ''
+    numRepes=0
+    valRepes=0
+    kAnt=''
+    resRepes= ''
+
+    while valor>0:
+        k, v= busca_valor_menor_o_igual(valor)
+        valor -= v
+        kind= klist.index(k)
+        ksup= kind-1
+        kinf= kind+1
+
+
+        if kAnt==k:
+            
+            numRepes +=1
+            valRepes += numRom[klist[kind]]
+            resRepes +=k
+            if numRepes>2:
+                
+                if valRepes + numRom[klist[kind]] == numRom[klist[ksup]]- numRom[klist[kind]]:
+                    resRepes= (klist[ksup])
+                    resultado += resRepes
+                #elif valRepes== 
+                   # resRepes += (klist[ksup]+ klist[kinf])
+            
+        if kAnt== '' or kAnt != k:
+             
+            if klist.index(k) %2 != 0:
+                if (valor+ v) ==numRom[klist[ksup]]-numRom[klist[kinf]]:
+                    res += (klist[kinf]+ klist[ksup])
+                    valor -= numRom[klist[ksup]]-numRom[klist[kinf]]
+                else:
+                    res +=k
+            else:
+                res += k
+            #resultado += res
+        kAnt=k
+        resultado = (res +resRepes)   
+    return resultado
+
+    
+
+def busca_valor_menor_o_igual(v):
+    for key, value in numRom.items():
+        if value <= v:
+            return key, value
+
+
+def descomponer(numero):
+    
