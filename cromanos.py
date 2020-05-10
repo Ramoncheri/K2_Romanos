@@ -15,12 +15,20 @@ class RomanNumber():
     def __init__(self, valor):
         if isinstance(valor,str):
             self.value= self.romano_a_entero(valor)
-            self.romanValue= valor
+            if self.value == 'Error de formato':
+                self.romanValue= self.value
+            else:
+                 self.romanValue= valor
+
         else:
             self.value= valor
-            self.romanValue= self.entero_a_romano(valor)
+            self.romanValue= self.entero_a_romano()
+            if self.romanValue == 'Overflow':
+                self.value = self.romanValue
+
 
     def romano_a_entero(self, rom):
+
         if rom== '':
             return 'Error de formato'
 
@@ -139,3 +147,54 @@ class RomanNumber():
             numero= resto
         res.append(numero)
         return res
+
+    def __str__(self):
+        return self.romanValue
+
+    def __repr__(self):
+        return self.romanValue
+
+    def __add__(self, other):
+        if isinstance (other, int):
+            suma= self.value + other
+        else:
+            suma= self.value+ other.value
+        resultado= RomanNumber(suma)
+        return resultado
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __sub__(self, other):
+        if isinstance(other, int):
+            resta= self. value - other
+        else:
+            resta= self.value - other.value
+        resultado= RomanNumber(resta)
+        return resultado
+
+    def __rsub__(self, other):
+        return self.__sub__(other)
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            mult= self.value * other
+        else:
+            mult= self.value * other.value
+        resultado= RomanNumber(mult)
+        return resultado
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __truediv__(self, other):
+        if isinstance(other, int):
+            divis= self.value / other
+        else:
+            divis= self.value / other.value
+        resultado= RomanNumber(divis)
+        return resultado
+    
